@@ -1,6 +1,6 @@
 import React from 'react'
-import { Container, Button, Row, Col, Image } from 'react-bootstrap';
-import ReviewsSection from "./ReviewsSection"
+import { Container, Button, Row, Col, Image, Accordion, Card } from 'react-bootstrap';
+import ReviewsSection from "../Components/ReviewsSection"
 
 // Image Imports
 import waditekLogo from '../assets/image/Waditek.png';
@@ -15,6 +15,15 @@ import step4Img from '../assets/image/step-4.png';
 import zigzagBg from '../assets/image/zigzag.png';
 
 import meetingImg from '../assets/image/meeting.png';
+
+import avatar1 from '../assets/image/avatar-1.svg';
+import avatar2 from '../assets/image/avatar-2.svg';
+import avatar3 from '../assets/image/avatar-3.svg';
+import avatar4 from '../assets/image/avatar-4.svg';
+
+import customer1 from '../assets/image/customer-1.png';
+import customer2 from '../assets/image/customer-2.png';
+import customer3 from '../assets/image/customer-3.png';
 
 export default function Home() {
   const logos = [
@@ -72,6 +81,50 @@ export default function Home() {
       rotate: "-1deg",
     },
   ];
+  const avatars = [avatar1, avatar4, avatar3, avatar2];
+  const faqs = [
+    {
+      id: "0",
+      question: "Why should I use SorsX?",
+      answer: "Placeholder content for this accordion, which is intended to demonstrate the .accordion-flush class. This is the first item’s accordion body."
+    },
+    {
+      id: "1",
+      question: "How can AI interviews help hiring managers who are not technical experts?",
+      answer: "Placeholder content for this accordion, which is intended to demonstrate the .accordion-flush class. This is the second item’s accordion body. Let’s imagine this being filled with some actual content."
+    },
+    {
+      id: "2",
+      question: "Can AI interviews really understand complex or niche industries like physics, aerospace, or engineering?",
+      answer: "Placeholder content for this accordion, which is intended to demonstrate the .accordion-flush class. This is the third item’s accordion body. Nothing more exciting happening here in terms of content."
+    },
+    {
+      id: "3",
+      question: "How does AI interviewing make the recruitment process faster and more efficient?",
+      answer: "Placeholder content for this accordion, which is intended to demonstrate the .accordion-flush class. This is the fourth item’s accordion body."
+    }
+  ];
+  const stories = [
+    {
+      id: 1,
+      image: customer1,
+      text: "BEEM relies on Canny to streamline their legal operations.",
+      alignment: "justify-content-md-start"
+    },
+    {
+      id: 2,
+      image: customer2,
+      text: "Ableto launched in 5 countries simultaneously with Canny's help.",
+      alignment: "justify-content-center"
+    },
+    {
+      id: 3,
+      image: customer3,
+      text: "Overton reduced their legal costs by 45% in one year.",
+      alignment: "justify-content-md-end"
+    }
+  ];
+
   return (
     <>
       <div className="container-2 text-decoration-none">
@@ -209,6 +262,105 @@ export default function Home() {
       </div>
 
       <ReviewsSection />
+
+      <div className="community-section d-flex flex-column align-items-center justify-content-center py-5">
+        <Container className="community-content text-center">
+
+          <h1 className="community-title mb-5 fw-bold mx-md-0 mx-3">
+            We’re building a powerful network of recruiting experts
+          </h1>
+
+          <div className="button-wrapper">
+            <Button className="community-btn mb-5">
+              Join our recruiter community
+            </Button>
+          </div>
+
+          <div className="community-users d-flex align-items-center gap-2">
+            <div className="community-avatars mb-1">
+              {avatars.map((src, index) => (
+                <Image
+                  key={index}
+                  src={src}
+                  alt={`User ${index + 1}`}
+                  className="community-avatar"
+                  roundedCircle
+                />
+              ))}
+
+              <p className="community-users-text m-0 ms-3">
+                Join over 500+ users moving with SorsX
+              </p>
+            </div>
+          </div>
+
+        </Container>
+      </div>
+
+      <div className="faq-section d-flex flex-column align-items-center justify-content-center">
+        <Container className="faq-content text-center">
+
+          <h1 className="faq-title mb-5 fw-bold display-4">What. The. FAQ</h1>
+          <div className="accordion accordion-flush mb-md-5 mb-3 mx-lg-0 mx-4 justify-content-center d-flex" id="accordionFlushExample">
+            <Accordion
+              flush
+              className="mb-2"
+              id="accordionFlushExample"
+            >
+              {faqs.map((faq) => (
+                <Accordion.Item eventKey={faq.id} key={faq.id} className="mb-2">
+                  <Accordion.Header className="fw-semibold">
+                    {faq.question}
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    {faq.answer}
+                  </Accordion.Body>
+                </Accordion.Item>
+              ))}
+            </Accordion>
+          </div>
+          <a href="#" className="fw-bold pb-1 text-decoration-none">
+            Learn More <i className="fa-solid fa-arrow-right ms-2"></i>
+          </a>
+
+        </Container>
+      </div>
+
+      <div className="card-section pb-5">
+        <Container className="card-content d-flex align-items-center flex-column py-md-5">
+
+          <h1 className="mb-5 fw-bold">Grow you knowledge with us</h1>
+
+          <Row className="px-0 w-100 d-flex justify-content-between">
+            {stories.map((story) => (
+              <Col
+                key={story.id}
+                md={4}
+                className={`d-flex ${story.alignment} justify-content-center mb-md-0 mb-3 mx-0`}
+              >
+                <Card
+                  className="pb-0 border-0 shadow-sm"
+                  style={{ width: '22rem', height: 'fit-content' }}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={story.image}
+                    className="img-fluid"
+                    alt="Customer Story"
+                  />
+                  <Card.Body className="px-0">
+                    <h6 className="card-text fw-normal mb-3">
+                      {story.text}
+                    </h6>
+                    <div class="btn fw-semibold">Read Story</div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+
+        </Container>
+      </div>
     </>
   )
 }
